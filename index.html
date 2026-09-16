@@ -1,36 +1,293 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basic Website</title>
-    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Project</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 36px;
+        }
+
+
+        /* =========================
+           PROJECT NAVIGATION BAR
+        ========================= */
+
+        .project-nav {
+            position: sticky;
+            top: 15px;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+
+            background: white;
+            padding: 15px;
+
+            margin-bottom: 50px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+            overflow-x: auto;
+        }
+
+        .project-nav a {
+            text-decoration: none;
+            color: #333;
+
+            background: #eeeeee;
+
+            padding: 12px 20px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            transition: all 0.3s ease;
+        }
+
+        .project-nav a:hover {
+            background: #3498db;
+            color: white;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           PROJECT CARDS
+        ========================= */
+
+        .image-card {
+            background-color: white;
+            margin-bottom: 40px;
+
+            border-radius: 12px;
+            overflow: hidden;
+
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+            /* Prevents the sticky bar from covering the heading */
+            scroll-margin-top: 120px;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 450px;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .image-content {
+            padding: 25px;
+        }
+
+        .image-content h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .image-content p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .project-nav {
+                justify-content: flex-start;
+            }
+
+            .image-card img {
+                height: 280px;
+            }
+
+            .image-content h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <header>
-        <h1>My Basic Website</h1>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+
+    <div class="container">
+
+        <h1>My Project Gallery</h1>
+
+
+        <!-- =========================
+             PROJECT NAVIGATION
+        ========================== -->
+
+        <nav class="project-nav">
+
+            <a href="#project1">
+                Project One
+            </a>
+
+            <a href="#project2">
+                Project Two
+            </a>
+
+            <a href="#project3">
+                Project Three
+            </a>
+
+            <a href="#project4">
+                Project Four
+            </a>
+
         </nav>
-    </header>
 
-    <main>
-        <section class="hero">
-            <h2>Welcome</h2>
-            <p>This is a simple starter webpage.</p>
-        </section>
 
-        <section class="content">
-            <h3>About This Site</h3>
-            <p>Use this layout as a foundation for your project.</p>
-        </section>
-    </main>
+        <!-- =========================
+             PROJECT 1
+        ========================== -->
 
-    <footer>
-        <p>© 2025 My Basic Website</p>
-    </footer>
+        <div class="image-card" id="project1">
+
+            <img src="./images/image1.jpg" alt="Project Image 1">
+
+            <div class="image-content">
+
+                <h2>Project One</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Praesent vitae justo nec lorem tincidunt consequat.
+                    Suspendisse potenti. Integer malesuada, neque at
+                    consectetur tincidunt, libero lorem feugiat massa,
+                    vitae consequat ipsum nulla at erat.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             PROJECT 2
+        ========================== -->
+
+        <div class="image-card" id="project2">
+
+            <img src="./images/image2.jpg" alt="Project Image 2">
+
+            <div class="image-content">
+
+                <h2>Project Two</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec feugiat, sapien sed faucibus tincidunt, mauris
+                    lectus consectetur libero, vitae tincidunt justo neque
+                    eget augue. Morbi vitae lectus sed libero consequat
+                    pellentesque.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             PROJECT 3
+        ========================== -->
+
+        <div class="image-card" id="project3">
+
+            <img src="./images/image3.jpg" alt="Project Image 3">
+
+            <div class="image-content">
+
+                <h2>Project Three</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vestibulum ante ipsum primis in faucibus orci luctus et
+                    ultrices posuere cubilia curae. Nam vitae neque vel
+                    lectus aliquet faucibus. Phasellus vitae mauris sed
+                    libero tincidunt vulputate.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             PROJECT 4
+        ========================== -->
+
+        <div class="image-card" id="project4">
+
+            <img src="./images/image4.jpg" alt="Project Image 4">
+
+            <div class="image-content">
+
+                <h2>Project Four</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Mauris vitae lorem vel augue posuere consequat.
+                    Pellentesque habitant morbi tristique senectus et netus
+                    et malesuada fames ac turpis egestas.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </body>
 </html>

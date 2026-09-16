@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Project</title>
+    <title>My Portfolio</title>
 
     <style>
         * {
@@ -24,65 +24,184 @@
             padding: 40px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 36px;
-        }
-
 
         /* =========================
-           PROJECT NAVIGATION BAR
+           SIDE PROJECT BAR
         ========================= */
 
         .project-nav {
-            position: sticky;
-            top: 15px;
-            z-index: 1000;
+            position: fixed;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
 
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+            width: 190px;
 
             background: white;
             padding: 15px;
 
-            margin-bottom: 50px;
-
-            border-radius: 12px;
+            border-radius: 15px;
 
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 
-            overflow-x: auto;
+            z-index: 1000;
+        }
+
+        .project-nav h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
         }
 
         .project-nav a {
+            display: block;
+
             text-decoration: none;
-            color: #333;
+            color: #444;
 
-            background: #eeeeee;
+            padding: 12px 15px;
+            margin-bottom: 8px;
 
-            padding: 12px 20px;
-
-            border-radius: 25px;
-
-            font-weight: bold;
-
-            white-space: nowrap;
+            border-radius: 8px;
 
             transition: all 0.3s ease;
         }
 
         .project-nav a:hover {
-            background: #3498db;
+            background-color: #3498db;
             color: white;
 
-            transform: translateY(-2px);
+            padding-left: 20px;
+        }
+
+
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
+        .container {
+            width: calc(100% - 280px);
+            max-width: none;
+
+            margin-left: 250px;
+            margin-right: 30px;
+        }
+
+
+        /* =========================
+           HEADINGS
+        ========================= */
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+        }
+
+
+        /* =========================
+           ABOUT ME
+        ========================= */
+
+        .about-section {
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 35px;
+
+            margin-bottom: 50px;
+
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+            display: grid;
+
+            grid-template-columns: 250px 1fr;
+
+            gap: 40px;
+
+            scroll-margin-top: 40px;
+        }
+
+
+        /* Profile */
+
+        .profile {
+            text-align: center;
+        }
+
+        .profile img {
+            width: 180px;
+            height: 180px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            margin-bottom: 20px;
+
+            border: 5px solid #3498db;
+        }
+
+        .profile h2 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .profile h3 {
+            font-size: 16px;
+            color: #3498db;
+            font-weight: normal;
+        }
+
+
+        /* About content */
+
+        .about-content h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .about-content > p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+
+        /* Information cards */
+
+        .about-info {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+        .info-box {
+            background: #f4f4f4;
+
+            padding: 20px;
+
+            border-radius: 10px;
+        }
+
+        .info-box h3 {
+            color: #3498db;
+
+            margin-bottom: 10px;
+
+            font-size: 18px;
+        }
+
+        .info-box p {
+            color: #666;
+
+            line-height: 1.6;
+
+            font-size: 15px;
         }
 
 
@@ -92,15 +211,16 @@
 
         .image-card {
             background-color: white;
+
             margin-bottom: 40px;
 
             border-radius: 12px;
+
             overflow: hidden;
 
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
-            /* Prevents the sticky bar from covering the heading */
-            scroll-margin-top: 120px;
+            scroll-margin-top: 40px;
         }
 
         .image-card img {
@@ -129,25 +249,111 @@
 
 
         /* =========================
+           CLICKABLE PROJECT CARDS
+        ========================= */
+
+        .project-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-link .image-card {
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .project-link:hover .image-card {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-link:hover h2 {
+            color: #3498db;
+        }
+
+
+        /* =========================
            MOBILE
         ========================= */
 
-        @media (max-width: 600px) {
+        @media (max-width: 900px) {
+
+            .about-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-info {
+                grid-template-columns: 1fr;
+            }
+
+            .profile img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+
+        @media (max-width: 800px) {
 
             body {
                 padding: 20px;
             }
 
-            h1 {
-                font-size: 28px;
-            }
+
+            /* Turn sidebar into horizontal navigation */
 
             .project-nav {
-                justify-content: flex-start;
+                position: sticky;
+
+                top: 15px;
+                left: auto;
+
+                transform: none;
+
+                width: 100%;
+
+                margin-bottom: 30px;
+
+                display: flex;
+
+                overflow-x: auto;
+
+                gap: 8px;
             }
+
+            .project-nav h3 {
+                display: none;
+            }
+
+            .project-nav a {
+                white-space: nowrap;
+
+                margin-bottom: 0;
+            }
+
+
+            /* Main content */
+
+            .container {
+                width: 100%;
+
+                margin: auto;
+            }
+
+
+            /* Projects */
 
             .image-card img {
                 height: 280px;
+            }
+
+            h1 {
+                font-size: 28px;
             }
 
             .image-content h2 {
@@ -157,135 +363,293 @@
     </style>
 </head>
 
+
 <body>
+
+
+    <!-- =========================
+         SIDE NAVIGATION
+    ========================== -->
+
+    <nav class="project-nav">
+
+        <h3>My Portfolio</h3>
+
+        <a href="#about">
+            About Me
+        </a>
+
+        <a href="#project1">
+            Project One
+        </a>
+
+        <a href="#project2">
+            Project Two
+        </a>
+
+        <a href="#project3">
+            Project Three
+        </a>
+
+        <a href="#project4">
+            Project Four
+        </a>
+
+    </nav>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
 
     <div class="container">
 
-        <h1>My Project Gallery</h1>
+
+        <!-- =========================
+             ABOUT ME
+        ========================== -->
+
+        <section class="about-section" id="about">
+
+            <!-- Profile -->
+
+            <div class="profile">
+
+                <img
+                    src="./images/image1.jpg"
+                    alt="Profile picture"
+                >
+
+                <h2>Your Name</h2>
+
+                <h3>Programmer & Developer</h3>
+
+            </div>
+
+
+            <!-- About information -->
+
+            <div class="about-content">
+
+                <h2>About Me</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    I am a passionate programmer interested in building
+                    useful, creative and reliable software. I enjoy learning
+                    new technologies, solving problems and turning ideas
+                    into working projects.
+                </p>
+
+
+                <div class="about-info">
+
+
+                    <!-- Experience -->
+
+                    <div class="info-box">
+
+                        <h3>Experience</h3>
+
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit. I have experience working
+                            on personal projects, web applications and
+                            software development.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Programming -->
+
+                    <div class="info-box">
+
+                        <h3>Programming</h3>
+
+                        <p>
+                            HTML, CSS, JavaScript, Python and other
+                            technologies. I enjoy learning new languages
+                            and experimenting with different tools.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Interests -->
+
+                    <div class="info-box">
+
+                        <h3>Interests</h3>
+
+                        <p>
+                            Web development, software engineering,
+                            technology, problem solving, design and
+                            exploring new ideas.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
 
 
         <!-- =========================
-             PROJECT NAVIGATION
+             PROJECT TITLE
         ========================== -->
 
-        <nav class="project-nav">
+        <h1>My Project Gallery</h1>
 
-            <a href="#project1">
-                Project One
-            </a>
-
-            <a href="#project2">
-                Project Two
-            </a>
-
-            <a href="#project3">
-                Project Three
-            </a>
-
-            <a href="#project4">
-                Project Four
-            </a>
-
-        </nav>
 
 
         <!-- =========================
              PROJECT 1
         ========================== -->
 
-        <div class="image-card" id="project1">
+        <a
+            href="https://kolkemboi.github.io/Asimov/"
+            class="project-link"
+            target="_blank"
+        >
 
-            <img src="./images/image1.jpg" alt="Project Image 1">
+            <div class="image-card" id="project1">
 
-            <div class="image-content">
+                <img
+                    src="./images/image1.jpg"
+                    alt="Project Image 1"
+                >
 
-                <h2>Project One</h2>
+                <div class="image-content">
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Praesent vitae justo nec lorem tincidunt consequat.
-                    Suspendisse potenti. Integer malesuada, neque at
-                    consectetur tincidunt, libero lorem feugiat massa,
-                    vitae consequat ipsum nulla at erat.
-                </p>
+                    <h2>Project One</h2>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Praesent vitae justo nec lorem tincidunt
+                        consequat. Suspendisse potenti. Integer malesuada,
+                        neque at consectetur tincidunt, libero lorem feugiat
+                        massa.
+                    </p>
+
+                </div>
 
             </div>
 
-        </div>
+        </a>
+
 
 
         <!-- =========================
              PROJECT 2
         ========================== -->
 
-        <div class="image-card" id="project2">
+        <a
+            href="https://example.com/project2"
+            class="project-link"
+            target="_blank"
+        >
 
-            <img src="./images/image2.jpg" alt="Project Image 2">
+            <div class="image-card" id="project2">
 
-            <div class="image-content">
+                <img
+                    src="./images/image2.jpg"
+                    alt="Project Image 2"
+                >
 
-                <h2>Project Two</h2>
+                <div class="image-content">
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Donec feugiat, sapien sed faucibus tincidunt, mauris
-                    lectus consectetur libero, vitae tincidunt justo neque
-                    eget augue. Morbi vitae lectus sed libero consequat
-                    pellentesque.
-                </p>
+                    <h2>Project Two</h2>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Donec feugiat, sapien sed faucibus tincidunt,
+                        mauris lectus consectetur libero, vitae tincidunt
+                        justo neque eget augue.
+                    </p>
+
+                </div>
 
             </div>
 
-        </div>
+        </a>
+
 
 
         <!-- =========================
              PROJECT 3
         ========================== -->
 
-        <div class="image-card" id="project3">
+        <a
+            href="https://example.com/project3"
+            class="project-link"
+            target="_blank"
+        >
 
-            <img src="./images/image3.jpg" alt="Project Image 3">
+            <div class="image-card" id="project3">
 
-            <div class="image-content">
+                <img
+                    src="./images/image3.jpg"
+                    alt="Project Image 3"
+                >
 
-                <h2>Project Three</h2>
+                <div class="image-content">
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vestibulum ante ipsum primis in faucibus orci luctus et
-                    ultrices posuere cubilia curae. Nam vitae neque vel
-                    lectus aliquet faucibus. Phasellus vitae mauris sed
-                    libero tincidunt vulputate.
-                </p>
+                    <h2>Project Three</h2>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Vestibulum ante ipsum primis in faucibus orci
+                        luctus et ultrices posuere cubilia curae. Nam vitae
+                        neque vel lectus aliquet faucibus.
+                    </p>
+
+                </div>
 
             </div>
 
-        </div>
+        </a>
+
 
 
         <!-- =========================
              PROJECT 4
         ========================== -->
 
-        <div class="image-card" id="project4">
+        <a
+            href="https://example.com/project4"
+            class="project-link"
+            target="_blank"
+        >
 
-            <img src="./images/image4.jpg" alt="Project Image 4">
+            <div class="image-card" id="project4">
 
-            <div class="image-content">
+                <img
+                    src="./images/image4.jpg"
+                    alt="Project Image 4"
+                >
 
-                <h2>Project Four</h2>
+                <div class="image-content">
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Mauris vitae lorem vel augue posuere consequat.
-                    Pellentesque habitant morbi tristique senectus et netus
-                    et malesuada fames ac turpis egestas.
-                </p>
+                    <h2>Project Four</h2>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Mauris vitae lorem vel augue posuere consequat.
+                        Pellentesque habitant morbi tristique senectus et
+                        netus et malesuada fames ac turpis egestas.
+                    </p>
+
+                </div>
 
             </div>
 
-        </div>
+        </a>
+
 
     </div>
 

@@ -2,16 +2,27 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Kemboi Cheruiyot</title>
-
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Kemboi Cheruiyot — Low-Level Systems & Robotics</title>
+	<meta name="description"
+		content="Kemboi Cheruiyot — Mechatronics engineer turned developer. Compilers, operating systems, low-level systems, robotics, AI, and graphics." />
 	<style>
+		:root {
+			--bg: #0d0f12;
+			--bg-elev: #14171c;
+			--bg-card: #171b21;
+			--border: #242a33;
+			--text: #e6e9ef;
+			--muted: #8b95a5;
+			--accent: #7dd3fc;
+			--accent-2: #a78bfa;
+			--mono: ui-monospace, "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, monospace;
+			--sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+		}
+
 		* {
 			box-sizing: border-box;
-			margin: 0;
-			padding: 0;
 		}
 
 		html {
@@ -19,608 +30,759 @@
 		}
 
 		body {
-			font-family: Arial, sans-serif;
-			background-color: #f4f4f4;
-			color: #333;
-			padding: 40px;
+			margin: 0;
+			background: var(--bg);
+			color: var(--text);
+			font-family: var(--sans);
+			line-height: 1.65;
+			-webkit-font-smoothing: antialiased;
 		}
 
-
-		/* =========================
-           SIDE PROJECT BAR
-        ========================= */
-
-		.project-nav {
+		/* subtle grid backdrop */
+		body::before {
+			content: "";
 			position: fixed;
-			left: 25px;
-			top: 50%;
-			transform: translateY(-50%);
-
-			width: 190px;
-
-			background: white;
-			padding: 15px;
-
-			border-radius: 15px;
-
-			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-
-			z-index: 1000;
+			inset: 0;
+			background-image:
+				linear-gradient(rgba(125, 211, 252, 0.035) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(125, 211, 252, 0.035) 1px, transparent 1px);
+			background-size: 44px 44px;
+			pointer-events: none;
+			z-index: 0;
 		}
 
-		.project-nav h3 {
-			font-size: 16px;
-			margin-bottom: 15px;
-			text-align: center;
+		.wrap {
+			position: relative;
+			z-index: 1;
+			max-width: 900px;
+			margin: 0 auto;
+			padding: 0 24px;
 		}
 
-		.project-nav a {
-			display: block;
-
+		a {
+			color: var(--accent);
 			text-decoration: none;
-			color: #444;
-
-			padding: 12px 15px;
-			margin-bottom: 8px;
-
-			border-radius: 8px;
-
-			transition: all 0.3s ease;
 		}
 
-		.project-nav a:hover {
-			background-color: #3498db;
-			color: white;
-
-			padding-left: 20px;
+		a:hover {
+			text-decoration: underline;
+			text-underline-offset: 3px;
 		}
 
-
-		/* =========================
-           MAIN CONTENT
-        ========================= */
-
-		.container {
-			width: calc(100% - 280px);
-			max-width: none;
-
-			margin-left: 250px;
-			margin-right: 30px;
+		/* ---------- Nav ---------- */
+		nav {
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			backdrop-filter: blur(10px);
+			background: rgba(13, 15, 18, 0.82);
+			border-bottom: 1px solid var(--border);
 		}
 
-
-		/* =========================
-           HEADINGS
-        ========================= */
-
-		h1 {
-			text-align: center;
-			margin-bottom: 40px;
-			font-size: 36px;
+		nav .wrap {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 60px;
 		}
 
-
-		/* =========================
-           ABOUT ME
-        ========================= */
-
-		.about-section {
-			background: white;
-
-			border-radius: 15px;
-
-			padding: 35px;
-
-			margin-bottom: 50px;
-
-			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-
-			display: grid;
-
-			grid-template-columns: 250px 1fr;
-
-			gap: 40px;
-
-			scroll-margin-top: 40px;
+		.brand {
+			font-family: var(--mono);
+			font-size: 0.95rem;
+			font-weight: 600;
+			color: var(--text);
+			letter-spacing: -0.02em;
 		}
 
-
-		/* Profile */
-
-		.profile {
-			text-align: center;
+		.brand span {
+			color: var(--accent);
 		}
 
-		.profile img {
-			width: 180px;
-			height: 180px;
-
-			object-fit: cover;
-
-			border-radius: 50%;
-
-			margin-bottom: 20px;
-
-			border: 5px solid #3498db;
+		.nav-links {
+			display: flex;
+			gap: 22px;
 		}
 
-		.profile h2 {
-			font-size: 25px;
-			margin-bottom: 8px;
+		.nav-links a {
+			font-size: 0.85rem;
+			color: var(--muted);
+			font-family: var(--mono);
 		}
 
-		.profile h3 {
-			font-size: 16px;
-			color: #3498db;
-			font-weight: normal;
-		}
-
-
-		/* About content */
-
-		.about-content h2 {
-			font-size: 30px;
-			margin-bottom: 15px;
-		}
-
-		.about-content>p {
-			color: #666;
-			line-height: 1.7;
-			font-size: 17px;
-			margin-bottom: 25px;
-		}
-
-
-		/* Information cards */
-
-		.about-info {
-			display: grid;
-
-			grid-template-columns: repeat(3, 1fr);
-
-			gap: 15px;
-		}
-
-		.info-box {
-			background: #f4f4f4;
-
-			padding: 20px;
-
-			border-radius: 10px;
-		}
-
-		.info-box h3 {
-			color: #3498db;
-
-			margin-bottom: 10px;
-
-			font-size: 18px;
-		}
-
-		.info-box p {
-			color: #666;
-
-			line-height: 1.6;
-
-			font-size: 15px;
-		}
-
-
-		/* =========================
-           PROJECT CARDS
-        ========================= */
-
-		.image-card {
-			background-color: white;
-
-			margin-bottom: 40px;
-
-			border-radius: 12px;
-
-			overflow: hidden;
-
-			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-			scroll-margin-top: 40px;
-		}
-
-		.image-card img {
-			width: 100%;
-			height: 450px;
-
-			object-fit: cover;
-
-			display: block;
-		}
-
-		.image-content {
-			padding: 25px;
-		}
-
-		.image-content h2 {
-			font-size: 28px;
-			margin-bottom: 15px;
-		}
-
-		.image-content p {
-			font-size: 17px;
-			line-height: 1.7;
-			color: #666;
-		}
-
-
-		/* =========================
-           CLICKABLE PROJECT CARDS
-        ========================= */
-
-		.project-link {
+		.nav-links a:hover {
+			color: var(--accent);
 			text-decoration: none;
-			color: inherit;
-			display: block;
 		}
 
-		.project-link .image-card {
-			transition:
-				transform 0.3s ease,
-				box-shadow 0.3s ease;
-		}
-
-		.project-link:hover .image-card {
-			transform: translateY(-5px);
-
-			box-shadow:
-				0 8px 20px rgba(0, 0, 0, 0.2);
-		}
-
-		.project-link:hover h2 {
-			color: #3498db;
-		}
-
-
-		/* =========================
-           MOBILE
-        ========================= */
-
-		@media (max-width: 900px) {
-
-			.about-section {
-				grid-template-columns: 1fr;
-				text-align: center;
-			}
-
-			.about-info {
-				grid-template-columns: 1fr;
-			}
-
-			.profile img {
-				width: 150px;
-				height: 150px;
-			}
-		}
-
-
-		@media (max-width: 800px) {
-
-			body {
-				padding: 20px;
-			}
-
-
-			/* Turn sidebar into horizontal navigation */
-
-			.project-nav {
-				position: sticky;
-
-				top: 15px;
-				left: auto;
-
-				transform: none;
-
-				width: 100%;
-
-				margin-bottom: 30px;
-
-				display: flex;
-
-				overflow-x: auto;
-
-				gap: 8px;
-			}
-
-			.project-nav h3 {
+		@media (max-width: 620px) {
+			.nav-links {
 				display: none;
 			}
+		}
 
-			.project-nav a {
-				white-space: nowrap;
+		/* ---------- Hero ---------- */
+		header.hero {
+			padding: 84px 0 56px;
+		}
 
-				margin-bottom: 0;
+		.prompt {
+			font-family: var(--mono);
+			font-size: 0.82rem;
+			color: var(--muted);
+			margin-bottom: 18px;
+		}
+
+		.prompt::before {
+			content: "$ ";
+			color: var(--accent-2);
+		}
+
+		h1 {
+			font-size: clamp(2rem, 6vw, 3.1rem);
+			line-height: 1.12;
+			margin: 0 0 18px;
+			letter-spacing: -0.035em;
+			font-weight: 700;
+		}
+
+		h1 .grad {
+			background: linear-gradient(100deg, var(--accent), var(--accent-2));
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.tagline {
+			font-family: var(--mono);
+			font-size: 0.86rem;
+			color: var(--accent);
+			margin-bottom: 26px;
+			line-height: 2;
+		}
+
+		.hero p.bio {
+			color: #c3cad6;
+			font-size: 1.02rem;
+			max-width: 68ch;
+			margin: 0 0 16px;
+		}
+
+		.hero-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-top: 30px;
+		}
+
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 10px 18px;
+			border-radius: 8px;
+			font-size: 0.88rem;
+			font-family: var(--mono);
+			border: 1px solid var(--border);
+			color: var(--text);
+			background: var(--bg-elev);
+			transition: all 0.18s ease;
+		}
+
+		.btn:hover {
+			border-color: var(--accent);
+			color: var(--accent);
+			text-decoration: none;
+			transform: translateY(-1px);
+		}
+
+		.btn.primary {
+			background: linear-gradient(100deg, rgba(125, 211, 252, 0.14), rgba(167, 139, 250, 0.14));
+			border-color: rgba(125, 211, 252, 0.4);
+			color: var(--accent);
+		}
+
+		/* ---------- Sections ---------- */
+		section {
+			padding: 52px 0;
+			border-top: 1px solid var(--border);
+		}
+
+		h2 {
+			font-size: 1.35rem;
+			margin: 0 0 8px;
+			letter-spacing: -0.02em;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		h2::before {
+			content: "";
+			width: 4px;
+			height: 20px;
+			border-radius: 2px;
+			background: linear-gradient(var(--accent), var(--accent-2));
+		}
+
+		.section-sub {
+			color: var(--muted);
+			font-size: 0.9rem;
+			margin: 0 0 30px;
+			font-family: var(--mono);
+		}
+
+		/* ---------- Project cards ---------- */
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: 16px;
+		}
+
+		.card {
+			display: block;
+			background: var(--bg-card);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 22px;
+			transition: all 0.2s ease;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.card::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(135deg, rgba(125, 211, 252, 0.06), transparent 55%);
+			opacity: 0;
+			transition: opacity 0.2s ease;
+			pointer-events: none;
+		}
+
+		.card:hover {
+			border-color: rgba(125, 211, 252, 0.45);
+			transform: translateY(-3px);
+			text-decoration: none;
+		}
+
+		.card:hover::after {
+			opacity: 1;
+		}
+
+		.card h3 {
+			margin: 0 0 10px;
+			font-size: 1.05rem;
+			color: var(--text);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+		}
+
+		.card h3 .arrow {
+			color: var(--muted);
+			font-size: 0.9rem;
+			transition: transform 0.2s ease, color 0.2s ease;
+		}
+
+		.card:hover h3 .arrow {
+			color: var(--accent);
+			transform: translate(2px, -2px);
+		}
+
+		.card p {
+			margin: 0 0 16px;
+			font-size: 0.9rem;
+			color: #aeb7c4;
+		}
+
+		.tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+		}
+
+		.tag {
+			font-family: var(--mono);
+			font-size: 0.7rem;
+			padding: 3px 9px;
+			border-radius: 99px;
+			background: rgba(125, 211, 252, 0.08);
+			border: 1px solid rgba(125, 211, 252, 0.2);
+			color: var(--accent);
+			white-space: nowrap;
+		}
+
+		/* ---------- Experience ---------- */
+		.exp {
+			border-left: 2px solid var(--border);
+			padding-left: 22px;
+			margin-bottom: 34px;
+			position: relative;
+		}
+
+		.exp:last-child {
+			margin-bottom: 0;
+		}
+
+		.exp::before {
+			content: "";
+			position: absolute;
+			left: -6px;
+			top: 7px;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background: var(--bg);
+			border: 2px solid var(--accent);
+		}
+
+		.exp-head {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: baseline;
+			gap: 8px;
+		}
+
+		.exp h3 {
+			margin: 0;
+			font-size: 1.02rem;
+		}
+
+		.exp .when {
+			font-family: var(--mono);
+			font-size: 0.76rem;
+			color: var(--muted);
+			white-space: nowrap;
+		}
+
+		.exp .where {
+			font-size: 0.85rem;
+			color: var(--accent-2);
+			margin: 2px 0 12px;
+			font-family: var(--mono);
+		}
+
+		.exp ul {
+			margin: 0;
+			padding-left: 18px;
+		}
+
+		.exp li {
+			font-size: 0.9rem;
+			color: #aeb7c4;
+			margin-bottom: 6px;
+		}
+
+		/* ---------- Skills ---------- */
+		.skill-groups {
+			display: grid;
+			gap: 18px;
+		}
+
+		.skill-row {
+			display: grid;
+			grid-template-columns: 150px 1fr;
+			gap: 16px;
+			align-items: start;
+			padding-bottom: 18px;
+			border-bottom: 1px dashed var(--border);
+		}
+
+		.skill-row:last-child {
+			border-bottom: none;
+			padding-bottom: 0;
+		}
+
+		.skill-label {
+			font-family: var(--mono);
+			font-size: 0.8rem;
+			color: var(--muted);
+			padding-top: 4px;
+		}
+
+		@media (max-width: 560px) {
+			.skill-row {
+				grid-template-columns: 1fr;
+				gap: 8px;
 			}
+		}
 
+		/* ---------- Areas tree ---------- */
+		pre.tree {
+			font-family: var(--mono);
+			font-size: 0.78rem;
+			line-height: 1.6;
+			color: #9aa6b6;
+			background: var(--bg-card);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 22px;
+			overflow-x: auto;
+			margin: 0;
+		}
 
-			/* Main content */
+		pre.tree b {
+			color: var(--accent);
+			font-weight: 600;
+		}
 
-			.container {
-				width: 100%;
+		/* ---------- Contact ---------- */
+		.contact-links {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+			gap: 12px;
+			margin-top: 6px;
+		}
 
-				margin: auto;
-			}
+		.contact-links a {
+			display: flex;
+			flex-direction: column;
+			gap: 2px;
+			padding: 16px 18px;
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			background: var(--bg-card);
+			transition: all 0.18s ease;
+		}
 
+		.contact-links a:hover {
+			border-color: var(--accent);
+			text-decoration: none;
+			transform: translateY(-2px);
+		}
 
-			/* Projects */
+		.contact-links .k {
+			font-family: var(--mono);
+			font-size: 0.72rem;
+			color: var(--muted);
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+		}
 
-			.image-card img {
-				height: 280px;
-			}
+		.contact-links .v {
+			font-size: 0.9rem;
+			color: var(--text);
+		}
 
-			h1 {
-				font-size: 28px;
-			}
-
-			.image-content h2 {
-				font-size: 23px;
-			}
+		footer {
+			border-top: 1px solid var(--border);
+			padding: 30px 0 44px;
+			font-family: var(--mono);
+			font-size: 0.78rem;
+			color: var(--muted);
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 10px;
 		}
 	</style>
 </head>
 
-
 <body>
 
-
-	<!-- =========================
-         SIDE NAVIGATION
-    ========================== -->
-
-	<nav class="project-nav">
-
-		<h3>Kemboi Cheruiyot</h3>
-
-		<a href="#about">
-			About Me
-		</a>
-
-		<a href="#APE">
-			Asimov Physics Engine
-		</a>
-
-		<a href="#Kollang">
-			Kollang Compiler
-		</a>
-
-		<a href="#KolOS">
-			Kol Operating System
-		</a>
-
-		<a href="#Coreutils">
-			Rust Coreutils
-		</a>
-
+	<nav>
+		<div class="wrap">
+			<a class="brand" href="#top">kemboi<span>@</span>cheruiyot</a>
+			<div class="nav-links">
+				<a href="#projects">projects</a>
+				<a href="#experience">experience</a>
+				<a href="#skills">skills</a>
+				<a href="#interests">interests</a>
+				<a href="#contact">contact</a>
+			</div>
+		</div>
 	</nav>
 
+	<a id="top"></a>
 
+	<div class="wrap">
 
-	<!-- =========================
-         MAIN CONTENT
-    ========================== -->
+		<!-- ================= HERO ================= -->
+		<header class="hero">
+			<div class="prompt">whoami</div>
+			<h1>Kemboi Cheruiyot<br /><span class="grad">low-level systems &amp; robotics</span></h1>
+			<div class="tagline">
+				Compilers &nbsp;•&nbsp; Operating Systems &nbsp;•&nbsp; Low-Level Systems &nbsp;•&nbsp; Robotics &nbsp;•&nbsp;
+				AI &nbsp;•&nbsp; Graphics
+			</div>
+			<p class="bio">
+				Mechatronics student turned developer. I stick to low-level work — kernels, compilers,
+				control loops — with a dash of robotics and intelligence. Trained in the full stack of
+				the physical world (electronics, mechanics, materials, control, math) and in the systems
+				world (Assembly, C, C++, Rust, Python).
+			</p>
+			<p class="bio">
+				Basically: I'm a dev who can also tell you what material to pick for your beams.
+			</p>
 
-	<div class="container">
+			<div class="hero-actions">
+				<a class="btn primary" href="https://github.com/KolKemboi" target="_blank" rel="noopener">GitHub ↗</a>
+				<a class="btn" href="https://linkedin.com/in/kemboi-cheruiyot" target="_blank" rel="noopener">LinkedIn ↗</a>
+				<a class="btn" href="mailto:kolkemboi@gmail.com">Email ↗</a>
+			</div>
+		</header>
 
+		<!-- ================= PROJECTS ================= -->
+		<section id="projects">
+			<h2>Projects</h2>
+			<p class="section-sub">// things built from scratch to understand how they work</p>
 
-		<!-- =========================
-             ABOUT ME
-        ========================== -->
+			<div class="grid">
 
-		<section class="about-section" id="about">
+				<a class="card" href="https://github.com/KolKemboi/Asimov" target="_blank" rel="noopener">
+					<h3>Asimov <span class="arrow">↗</span></h3>
+					<p>A physics engine focused on simulation, numerical methods, collision detection, rigid-body dynamics, and
+						real-time physics. Supports URDF robot import.</p>
+					<div class="tags">
+						<span class="tag">C++</span><span class="tag">OpenGL</span><span class="tag">GLM</span><span
+							class="tag">EnTT</span>
+					</div>
+				</a>
 
-			<!-- Profile -->
+				<a class="card" href="https://github.com/KolKemboi/kollang" target="_blank" rel="noopener">
+					<h3>Kollang <span class="arrow">↗</span></h3>
+					<p>A compiler exploring language implementation and code generation — lexing, parsing, AST, IR, optimization,
+						and LLVM-backed codegen.</p>
+					<div class="tags">
+						<span class="tag">C++</span><span class="tag">LLVM</span><span class="tag">Compilers</span>
+					</div>
+				</a>
 
-			<div class="profile">
+				<a class="card" href="https://github.com/KolKemboi/kernel" target="_blank" rel="noopener">
+					<h3>Tiny OS <span class="arrow">↗</span></h3>
+					<p>A small operating system built to explore what lives beneath modern abstractions — a two-stage x86
+						bootloader, GDT, IDT, interrupt handlers, and basic I/O.</p>
+					<div class="tags">
+						<span class="tag">C</span><span class="tag">Assembly</span><span class="tag">x86</span><span
+							class="tag">Kernel</span>
+					</div>
+				</a>
 
-				<img src="./images/image1.jpg" alt="Profile picture">
+				<a class="card" href="https://github.com/KolKemboi/rust_core_utils" target="_blank" rel="noopener">
+					<h3>Rust Coreutils <span class="arrow">↗</span></h3>
+					<p>Unix-style core utilities reimplemented in Rust, with unit and integration tests validated against the
+						official implementations.</p>
+					<div class="tags">
+						<span class="tag">Rust</span><span class="tag">Unix</span><span class="tag">POSIX</span>
+					</div>
+				</a>
 
-				<h2>Kemboi Cheruiyot</h2>
+				<a class="card" href="https://github.com/KolKemboi/Klaw" target="_blank" rel="noopener">
+					<h3>Klaw <span class="arrow">↗</span></h3>
+					<p>A robotic arm project spanning low-level control, kinematics, motion planning, and hardware/software
+						integration.</p>
+					<div class="tags">
+						<span class="tag">C++</span><span class="tag">Robotics</span><span class="tag">Kinematics</span><span
+							class="tag">Embedded</span>
+					</div>
+				</a>
 
-				<h3>Engineering & Developer</h3>
+				<a class="card" href="https://github.com/KolKemboi/DriveBot" target="_blank" rel="noopener">
+					<h3>DriveBot <span class="arrow">↗</span></h3>
+					<p>A differential-drive robot exploring motor control, localization, navigation, and autonomous behavior.</p>
+					<div class="tags">
+						<span class="tag">C++</span><span class="tag">ROS2</span><span class="tag">Control</span><span
+							class="tag">Navigation</span>
+					</div>
+				</a>
 
 			</div>
-
-
-			<!-- About information -->
-
-			<div class="about-content">
-
-				<h2>Who is he?</h2>
-
-				<p>
-					Hi, I am Kemboi Cheruiyot, a Mechatronics Engineering student turned low level systems Developer.
-					Started Mechatronics a few years back, got into programming in my teens and during my Engineering degree, I
-					got into low level systems.
-					Mechatronics actually requires us to know how memory is made using transistors, how memory is controlled in
-					assembly and to know C and python.
-					I am a Linux (Arch BTW and Ubuntu) and Neovim user.
-				</p>
-
-
-				<div class="about-info">
-
-
-					<!-- Experience -->
-
-					<div class="info-box">
-
-						<h3>Experience</h3>
-
-						<p>
-							I have worked in various fields in Software development. I had a stint as Data Science Intern, then
-							another stint as a AI intern and finally, I also did research in Robotics.
-						</p>
-
-					</div>
-
-
-					<!-- Programming -->
-
-					<div class="info-box">
-
-						<h3>Programming</h3>
-
-						<p>
-							I have experience working with python, but the past year, I have worked extensively in C/C++, Rust and
-							Assembly. I have worked with Golang, GDscript, C#, Java and Lua
-						</p>
-
-					</div>
-
-
-					<!-- Interests -->
-
-					<div class="info-box">
-
-						<h3>Interests</h3>
-
-						<p>
-							I am super into Formula 1, Art (Baroque Era), Culinary Arts, Computers, Engineering, Astronomy,
-							History, Physics, Architecture (Brutalist).
-							Generally, I know something about anything
-						</p>
-
-					</div>
-
-				</div>
-
-			</div>
-
 		</section>
 
+		<!-- ================= EXPERIENCE ================= -->
+		<section id="experience">
+			<h2>Experience</h2>
+			<p class="section-sub">// research, internships, and hardware</p>
 
-
-		<!-- =========================
-             PROJECT TITLE
-        ========================== -->
-
-		<h1>My Project Gallery</h1>
-
-
-
-		<!-- =========================
-             PROJECT 1
-        ========================== -->
-
-		<a href="https://kolkemboi.github.io/Asimov/" class="project-link" target="_blank">
-
-			<div class="image-card" id="APE">
-
-				<img src="./images/image1.jpg" alt="Project Image 1">
-
-				<div class="image-content">
-
-					<h2>Asimov Physics Engine</h2>
-
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing
-						elit. Praesent vitae justo nec lorem tincidunt
-						consequat. Suspendisse potenti. Integer malesuada,
-						neque at consectetur tincidunt, libero lorem feugiat
-						massa.
-					</p>
-
+			<div class="exp">
+				<div class="exp-head">
+					<h3>Undergraduate Research Assistant</h3>
+					<span class="when">Oct 2024 – Apr 2026</span>
 				</div>
-
+				<div class="where">Czech Technical University · Prague, Czech Republic (Remote)</div>
+				<ul>
+					<li>Co-authored a comprehensive survey on Multi-Agent Reinforcement Learning (MARL), Federated Learning, and
+						decentralized cooperative/non-cooperative AI systems.</li>
+					<li>Analyzed state-of-the-art coordination, communication, and distributed learning frameworks across
+						autonomous agent environments.</li>
+					<li>Investigated applications in autonomous systems, robotics, distributed optimization, and large-scale AI
+						agents.</li>
+					<li>Published on arXiv (2025); worked with Docker, ROS2, C++, and Python in Linux-based simulation software.
+					</li>
+				</ul>
 			</div>
 
-		</a>
-
-
-
-		<!-- =========================
-             PROJECT 2
-        ========================== -->
-
-		<a href="https://kolkemboi.github.io/kollang/" class="project-link" target="_blank">
-
-			<div class="image-card" id="Kollang">
-
-				<img src="./images/image2.jpg" alt="Project Image 2">
-
-				<div class="image-content">
-
-					<h2>Kollang Compiler</h2>
-
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing
-						elit. Donec feugiat, sapien sed faucibus tincidunt,
-						mauris lectus consectetur libero, vitae tincidunt
-						justo neque eget augue.
-					</p>
-
+			<div class="exp">
+				<div class="exp-head">
+					<h3>Embedded Developer Intern</h3>
+					<span class="when">Jun 2024 – Sep 2024</span>
 				</div>
-
+				<div class="where">Dedan Kimathi University Center for Energy Studies · Nyeri, Kenya</div>
+				<ul>
+					<li>Designed circuits in KiCad for a heat monitoring system for a heat pump.</li>
+					<li>Programmed the designed circuit in STM32CubeIDE using C and C++.</li>
+				</ul>
 			</div>
 
-		</a>
-
-
-
-		<!-- =========================
-             PROJECT 3
-        ========================== -->
-
-		<a href="https://kolkemboi.github.io/Kernel/" class="project-link" target="_blank">
-
-			<div class="image-card" id="KolOS">
-
-				<img src="./images/image3.jpg" alt="Project Image 3">
-
-				<div class="image-content">
-
-					<h2>Kol Operating System</h2>
-
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing
-						elit. Vestibulum ante ipsum primis in faucibus orci
-						luctus et ultrices posuere cubilia curae. Nam vitae
-						neque vel lectus aliquet faucibus.
-					</p>
-
+			<div class="exp">
+				<div class="exp-head">
+					<h3>AI and Computer Vision Intern</h3>
+					<span class="when">Oct 2023 – Apr 2024</span>
 				</div>
-
+				<div class="where">Metapix · India (Remote)</div>
+				<ul>
+					<li>Developed a makeup try-on feature using Dlib, OpenCV, and TensorFlow, improving precision in virtual
+						makeup application.</li>
+					<li>Worked on body reshape and face editing projects, applying advanced computer vision techniques.</li>
+					<li>Contributed AI-driven image processing tools that improved user engagement and were praised for efficiency
+						and accuracy.</li>
+				</ul>
 			</div>
+		</section>
 
-		</a>
+		<!-- ================= SKILLS ================= -->
+		<section id="skills">
+			<h2>Skills &amp; Tools</h2>
+			<p class="section-sub">// what I reach for</p>
 
-
-
-		<!-- =========================
-             PROJECT 4
-        ========================== -->
-
-		<a href="https://kolkemboi.github.io/rust_core_utils/" class="project-link" target="_blank">
-
-			<div class="image-card" id="Coreutils">
-
-				<img src="./images/image4.jpg" alt="Project Image 4">
-
-				<div class="image-content">
-
-					<h2>Rust Coreutils Clone</h2>
-
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing
-						elit. Mauris vitae lorem vel augue posuere consequat.
-						Pellentesque habitant morbi tristique senectus et
-						netus et malesuada fames ac turpis egestas.
-					</p>
-
+			<div class="skill-groups">
+				<div class="skill-row">
+					<div class="skill-label">languages</div>
+					<div class="tags">
+						<span class="tag">Assembly</span><span class="tag">C</span><span class="tag">C++</span>
+						<span class="tag">Rust</span><span class="tag">Python</span>
+					</div>
 				</div>
-
+				<div class="skill-row">
+					<div class="skill-label">libraries</div>
+					<div class="tags">
+						<span class="tag">OpenGL</span><span class="tag">LLVM</span><span class="tag">TensorFlow</span>
+						<span class="tag">ROS2</span><span class="tag">OpenCV</span><span class="tag">MoveIt</span>
+						<span class="tag">NAV2</span><span class="tag">Tokio</span>
+					</div>
+				</div>
+				<div class="skill-row">
+					<div class="skill-label">tools</div>
+					<div class="tags">
+						<span class="tag">Make</span><span class="tag">CMake</span><span class="tag">GDB</span>
+						<span class="tag">Valgrind</span><span class="tag">Git</span><span class="tag">Docker</span>
+						<span class="tag">KiCad</span><span class="tag">STM32CubeIDE</span>
+					</div>
+				</div>
+				<div class="skill-row">
+					<div class="skill-label">platforms</div>
+					<div class="tags">
+						<span class="tag">Linux</span><span class="tag">Ubuntu</span><span class="tag">Arch</span>
+						<span class="tag">ARM</span><span class="tag">Raspberry Pi</span><span class="tag">x86/x86_64</span>
+					</div>
+				</div>
+				<div class="skill-row">
+					<div class="skill-label">environment</div>
+					<div class="tags">
+						<span class="tag">Neovim</span>
+					</div>
+				</div>
 			</div>
+		</section>
 
-		</a>
+		<!-- ================= EDUCATION ================= -->
+		<section id="education">
+			<h2>Education</h2>
+			<p class="section-sub">// where the math happened</p>
 
+			<div class="exp">
+				<div class="exp-head">
+					<h3>BSc. Mechatronics Engineering</h3>
+				</div>
+				<div class="where">Dedan Kimathi University of Technology · Nyeri, Kenya</div>
+				<ul>
+					<li>Relevant coursework: Programming, Mechatronic Systems Programming, Assembly Programming, Computer
+						Architecture, Digital Electronics.</li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- ================= INTERESTS ================= -->
+		<section id="interests">
+			<h2>Areas of Interest</h2>
+			<p class="section-sub">// the map of things I dig into</p>
+
+			<pre class="tree">
+				<b>Compilers</b>
+				├── Lexing
+				├── Parsing
+				├── IR
+				├── Optimization
+				└── Code Generation
+
+				<b>Operating Systems</b>
+				├── Kernels
+				├── Memory Management
+				├── Processes
+				├── Scheduling
+				└── Hardware Interfaces
+
+				<b>Systems Programming</b>
+				├── C
+				├── C++
+				├── Rust
+				└── Assembly
+
+				<b>Robotics</b>
+				├── Kinematics
+				├── Control
+				├── Motion Planning
+				├── Sensors
+				└── Autonomous Systems
+
+				<b>Graphics &amp; Simulation</b>
+				├── Rendering
+				├── Physics
+				├── Collision Detection
+				├── Numerical Methods
+				└── Real-Time Simulation
+
+				<b>AI</b>
+				├── Algorithms
+				├── Robotics AI
+				├── Simulation
+				└── Intelligent Systems
+			</pre>
+		</section>
+
+		<!-- ================= CONTACT ================= -->
+		<section id="contact">
+			<h2>Contact</h2>
+			<p class="section-sub">// say hi, or send me a compiler bug</p>
+
+			<div class="contact-links">
+				<a href="mailto:kolkemboi@gmail.com">
+					<span class="k">Email</span>
+					<span class="v">kolkemboi@gmail.com</span>
+				</a>
+				<a href="https://github.com/KolKemboi" target="_blank" rel="noopener">
+					<span class="k">GitHub</span>
+					<span class="v">github.com/KolKemboi</span>
+				</a>
+				<a href="https://linkedin.com/in/kemboi-cheruiyot" target="_blank" rel="noopener">
+					<span class="k">LinkedIn</span>
+					<span class="v">in/kemboi-cheruiyot</span>
+				</a>
+			</div>
+		</section>
+
+		<footer>
+			<span>© <span id="year"></span> Kemboi Cheruiyot</span>
+			<span>built by hand · no framework</span>
+		</footer>
 
 	</div>
 
+	<script>
+		document.getElementById("year").textContent = new Date().getFullYear();
+	</script>
 </body>
 
 </html>
